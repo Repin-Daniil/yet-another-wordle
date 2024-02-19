@@ -2,32 +2,32 @@
 
 namespace game {
 
-bool Game::IsRealWord(std::string_view word) {
+bool Game::IsRealWord(std::string_view word) const {
   return word.size() == constants::GameSettings::WORD_LENGTH && dict_->IsWordExist(word);
 }
 
-std::string_view Game::GetRandomWord() {
+std::string_view Game::GetRandomWord() const {
   return dict_->GetRandomWord();
 }
 
-WordCheckout Game::CheckWord(const std::string &user_answer, const std::string &secret_word) {
+WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secret_word) const {
   if (!IsRealWord(secret_word)) {
     throw std::runtime_error("Non-existent secret_word!");
   }
 
   if (!IsRealWord(user_answer)) {
-    return {UNREAL_WORD}; //FIXME а как там array проинициализровался
+    return {UNREAL_WORD};
   }
 
   WordCheckout result{};
-  std::unordered_map<char, int> alphabet; //FIXME Rename
+  std::unordered_map<char, int> alphabet;  // FIXME Rename
 
   for (const auto &letter : secret_word) {
-    ++alphabet[letter]; //FIXME А это сохранит?
+    ++alphabet[letter];
   }
 
   size_t i = 0;
-  result.status = SUCCESS;
+  result.status = RIGHT_WORD;
 
   for (const auto &letter : user_answer) {
     if (alphabet[letter] > 0) {
@@ -36,11 +36,11 @@ WordCheckout Game::CheckWord(const std::string &user_answer, const std::string &
       if (secret_word[i] == letter) {
         result.letters[i] = CORRECT;
       } else {
-        result.status = WRONG;
+        result.status = WRONG_WORD;
         result.letters[i] = WRONG_PLACE;
       }
     } else {
-      result.status = WRONG;
+      result.status = WRONG_WORD;
     }
 
     ++i;

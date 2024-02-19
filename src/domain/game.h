@@ -3,6 +3,7 @@
 #include <array>
 #include <memory>
 #include <unordered_map>
+#include <utility>
 
 #include "constants_storage.h"
 #include "dictionary.h"
@@ -11,9 +12,8 @@ namespace game {
 
 using constants::GameSettings;
 
-enum WordStatus { UNREAL_WORD, WRONG, SUCCESS };
+enum WordStatus { UNREAL_WORD, WRONG_WORD, RIGHT_WORD };
 enum LetterStatus { NONE, WRONG_PLACE, CORRECT };
-
 
 struct WordCheckout {
   WordStatus status;
@@ -29,9 +29,9 @@ class Game {
   explicit Game(std::unique_ptr<IDictionary> dict) : dict_(std::move(dict)) {
   }
 
-  std::string_view GetRandomWord();
-  WordCheckout CheckWord(const std::string& user_answer, const std::string &word);
-  bool IsRealWord(std::string_view word);
+  std::string_view GetRandomWord() const;
+  WordCheckout CheckWord(std::string_view user_answer, std::string_view word) const;
+  bool IsRealWord(std::string_view word) const;
 
  private:
   std::unique_ptr<IDictionary> dict_;
