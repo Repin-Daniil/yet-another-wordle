@@ -26,7 +26,7 @@ struct WordCheckout {
  */
 class Game {
  public:
-  explicit Game(std::unique_ptr<IDictionary> dict) : dict_(std::move(dict)) {
+  explicit Game(IDictionary &dict) : dict_(dict){
   }
 
   std::string_view GetRandomWord() const;
@@ -34,7 +34,7 @@ class Game {
   bool IsRealWord(std::string_view word) const;
 
  private:
-  std::unique_ptr<IDictionary> dict_;
+  IDictionary &dict_;
 };
 
 }  // namespace game

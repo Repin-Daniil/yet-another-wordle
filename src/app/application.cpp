@@ -1,45 +1,32 @@
 #include "application.h"
 
+namespace {
+
+using namespace userver;
+using namespace std::literals;
+
+}  // namespace
+
 namespace app {
 
-std::string Application::StartGame() {
-  auto player = players_.AddPlayer(game_.GetRandomWord());
+Application::Application(const components::ComponentConfig& config,
+                         const components::ComponentContext& context)
+    : LoggableComponentBase(config, context),
+      game_(context.FindComponent<infrastructure::DictionaryComponent>().GetDictionary()),
+//      pg_cluster_(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()),
+      players_(context.FindComponent<app::Players>()),
+      game_starter_(game_, players_),
+      word_checker_(game_, players_)
+{}
 
-  return player->GetToken();
-}
 
-std::optional<game::WordCheckout> Application::CheckWord(const std::string &token, std::string_view word) {
-  auto player = players_.GetPlayerByToken(token);
+Players& Application::GetPlayers() { return players_; }
 
-  if (!player) {
-    return std::nullopt;
-  }
+game::Game& Application::GetGame() { return game_; }
 
-  auto attempt = game_.CheckWord(word, player->GetSecretWord());
 
-  if (attempt.status != game::UNREAL_WORD) {
-    player->AddAttempt(attempt);
-  }
-
-  if (attempt.status == game::RIGHT_WORD || player->GetRemainingAttemptsAmount() == 0) {
-    auto new_word = game_.GetRandomWord();
-
-    while (new_word == player->GetSecretWord()) {
-      new_word = game_.GetRandomWord();  // FIXME, убрать после введения игровых сессий
-    }
-
-    player->ChangeSecretWord(new_word);  // TODO Потом вызывать здесь session->NextWord()
-  }
-
-  return attempt;
-}
-
-const Players &Application::GetPlayers() {
-  return players_;
-}
-
-const game::Game &Application::GetGame() {
-  return game_;
+void AppendApplication(userver::components::ComponentList& component_list) {
+  component_list.Append<Application>();
 }
 
 }  // namespace app

@@ -3,11 +3,11 @@
 namespace game {
 
 bool Game::IsRealWord(std::string_view word) const {
-  return word.size() == constants::GameSettings::WORD_LENGTH && dict_->IsWordExist(word);
+  return word.size() == constants::GameSettings::WORD_LENGTH && dict_.IsWordExist(word);
 }
 
 std::string_view Game::GetRandomWord() const {
-  return dict_->GetRandomWord();
+  return dict_.GetRandomWord();
 }
 
 WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secret_word) const {

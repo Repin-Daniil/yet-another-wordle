@@ -5,7 +5,9 @@
 #include <userver/testsuite/testsuite_support.hpp>
 #include <userver/utils/daemon_run.hpp>
 
-#include "hello.hpp"
+#include "app/application.h"
+#include "app/player.h"
+#include "infrastructure/dictionary_component.h"
 
 int main(int argc, char* argv[]) {
   auto component_list = userver::components::MinimalServerComponentList()
@@ -14,7 +16,9 @@ int main(int argc, char* argv[]) {
                             .Append<userver::components::HttpClient>()
                             .Append<userver::server::handlers::TestsControl>();
 
-  pg_service_template::AppendHello(component_list);
+  app::AppendApplication(component_list);
+  app::AppendPlayers(component_list);
+  infrastructure::AppendDictionary(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

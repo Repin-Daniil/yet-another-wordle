@@ -54,6 +54,7 @@ components_manager:
             path: /v1/hello               # Registering handler by URL '/v1/hello'.
             method: POST                  # It will only reply to POST requests.
             task_processor: main-task-processor  # Run it on CPU bound task processor
+            parse_args_from_body: true
 
         postgres-db-1:
             dbconnection: $dbconnection
