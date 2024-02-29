@@ -16,7 +16,7 @@ services:
         networks:
           - postgres
 
-    pg_service_template-container:
+    wordle-container:
         image: ghcr.io/userver-framework/ubuntu-userver-build-base:v1
         privileged: true
         environment:
