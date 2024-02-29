@@ -36,6 +36,7 @@ build-debug build-release: build-%: build_%/CMakeCache.txt
 # Test
 .PHONY: test-debug test-release
 test-debug test-release: test-%: build-%
+	cmake --build build_$* -j $(NPROCS) --target wordle_unittest
 	cd build_$* && ((test -t 1 && GTEST_COLOR=1 PYTEST_ADDOPTS="--color=yes" ctest -V) || ctest -V)
 	pep8 tests
 
@@ -71,7 +72,7 @@ format:
 
 # Internal hidden targets that are used only in docker environment
 --in-docker-start-debug --in-docker-start-release: --in-docker-start-%: install-%
-	psql 'postgresql://user:password@service-postgres:5432/pg_service_template_db-1' -f ./postgresql/data/initial_data.sql
+	psql 'postgresql://user:password@service-postgres:5432/wordle_db-1' -f ./postgresql/data/initial_data.sql
 	/home/user/.local/bin/wordle \
 		--config /home/user/.local/etc/wordle/static_config.yaml \
 		--config_vars /home/user/.local/etc/wordle/config_vars.docker.yaml
