@@ -1,5 +1,6 @@
 import pytest
 
+
 # Start the tests via `make test-debug` or `make test-release`
 
 async def test_start(service_client):
@@ -9,6 +10,7 @@ async def test_start(service_client):
     assert response.status == 200
     assert len(response.text) == 14
 
+
 async def test_first_time_users(service_client):
     token = await service_client.post('v1/start').text
 
@@ -17,4 +19,3 @@ async def test_first_time_users(service_client):
         params={'token': token, 'word': 'horse'},
     )
     assert response.status == 200
-
