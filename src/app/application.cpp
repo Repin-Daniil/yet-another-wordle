@@ -34,15 +34,8 @@ Token Application::StartGame() {
   return game_starter_.Start();  // Тут гонка в векторе с игроками будет. Потом почини
 }
 
-std::optional<game::WordCheckout> Application::CheckWord(const Token& token, std::string_view word) {
-  auto player = players_.GetPlayerByToken(token);
-
-  if (!player) {
-    return std::nullopt;
-  }
-
-  //TODO Оборачивать здесь в другую стуктуру. Включить туда еше и количество попыток и прочую инфу игрока
-  return word_checker_.Check(player, word);
+CheckWordResult Application::CheckWord(const Token& token, std::string_view word) {
+  return word_checker_.Check(token, word);
 }
 
 void AppendApplication(userver::components::ComponentList& component_list) {

@@ -33,13 +33,16 @@ add_library(${PROJECT_NAME}_objs
         src/app/application.h
         src/app/Players/player.cpp
         src/app/Players/player.h
-        src/app/Scenarios/scenarios.h
-        src/app/Scenarios/scenarios.cpp
         src/app/Players/players.h
         src/app/Players/PlayersComponent.h
         src/app/Players/PlayersComponent.cpp
         src/app/Players/Naive/naive_players.h
         src/app/Players/Naive/naive_players.cpp
+
+        src/app/Scenarios/scenarios.h
+        src/app/Scenarios/scenarios.cpp
+        src/app/Scenarios/check_word.h
+        src/app/Scenarios/check_word.cpp
 
         src/handlers/StartGame/start_game_handler.hpp
         src/handlers/StartGame/start_game_handler.cpp

@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 
+#include "check_word.h"
 #include "app/Players/players.h"
 #include "domain/game.h"
 
@@ -22,16 +23,5 @@ class GameStarter {
   IPlayers& players_;
 };
 
-class WordChecker {
- public:
-  WordChecker(game::Game& game, IPlayers& players) : game_(game), players_(players) {
-  }
-
-  game::WordCheckout Check(std::shared_ptr<Player> player, std::string_view word);
-
- private:
-  game::Game& game_;
-  IPlayers& players_;
-};
 
 }  // namespace app
