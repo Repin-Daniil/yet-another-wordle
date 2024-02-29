@@ -10,7 +10,7 @@ namespace infrastructure {
 
 class NaiveDictionary : public game::IDictionary {
  public:
-  explicit NaiveDictionary(std::unordered_set<std::string> words) : words_(std::move(words)) {
+  explicit NaiveDictionary(std::unordered_set<std::string_view> words) : words_(std::move(words)) {
   }
 
   std::string_view GetRandomWord() override;

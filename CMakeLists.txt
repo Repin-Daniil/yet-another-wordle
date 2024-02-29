@@ -31,10 +31,21 @@ add_library(${PROJECT_NAME}_objs
 
         src/app/application.cpp
         src/app/application.h
-        src/app/player.cpp
-        src/app/player.h
-        src/app/scenarios.h
-        src/app/scenarios.cpp
+        src/app/Players/player.cpp
+        src/app/Players/player.h
+        src/app/Scenarios/scenarios.h
+        src/app/Scenarios/scenarios.cpp
+        src/app/Players/players.h
+        src/app/Players/PlayersComponent.h
+        src/app/Players/PlayersComponent.cpp
+        src/app/Players/Naive/naive_players.h
+        src/app/Players/Naive/naive_players.cpp
+
+        src/handlers/StartGame/start_game_handler.hpp
+        src/handlers/StartGame/start_game_handler.cpp
+
+        src/handlers/CheckWord/check_handler.hpp
+        src/handlers/CheckWord/check_handler.cpp
         )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 

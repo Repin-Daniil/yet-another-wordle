@@ -7,14 +7,16 @@
 
 #include "userver/clients/http/client.hpp"
 #include "userver/clients/http/component.hpp"
+#include <userver/components/component_config.hpp>
+#include <userver/components/component_context.hpp>
 #include "userver/components/component_list.hpp"
 #include "userver/storages/postgres/cluster.hpp"
 #include "userver/storages/postgres/component.hpp"
 #include "userver/utils/assert.hpp"
 
 #include "domain/game.h"
-#include "scenarios.h"
-#include "player.h"
+#include "app/Players/players.h"
+#include "app/Scenarios/scenarios.h"
 #include "infrastructure/dictionary_component.h"
 
 namespace app {
@@ -27,15 +29,16 @@ class Application : public userver::components::LoggableComponentBase {
               const userver::components::ComponentContext& context);
   ~Application() = default;
 
+  Token StartGame();
+  std::optional<game::WordCheckout> CheckWord(const Token &token, std::string_view word);
 
-  app::Players& GetPlayers();
+  IPlayers& GetPlayers();
   game::Game& GetGame();
 
  private:
   game::Game game_;
-//  userver::storages::postgres::ClusterPtr pg_cluster_;
-
-  app::Players& players_;
+  userver::storages::postgres::ClusterPtr pg_cluster_;
+  IPlayers& players_;
 
   // Scenarios
   GameStarter game_starter_;

@@ -6,8 +6,10 @@
 #include <userver/utils/daemon_run.hpp>
 
 #include "app/application.h"
-#include "app/player.h"
+#include "app/Players/PlayersComponent.h"
 #include "infrastructure/dictionary_component.h"
+#include "handlers/StartGame/start_game_handler.hpp"
+#include "handlers/CheckWord/check_handler.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list = userver::components::MinimalServerComponentList()
@@ -16,9 +18,12 @@ int main(int argc, char* argv[]) {
                             .Append<userver::components::HttpClient>()
                             .Append<userver::server::handlers::TestsControl>();
 
-  app::AppendApplication(component_list);
-  app::AppendPlayers(component_list);
   infrastructure::AppendDictionary(component_list);
+  app::AppendPlayers(component_list);
+  app::AppendApplication(component_list);
+
+  handlers::AppendGameStarterHandler(component_list);
+  handlers::AppendCheckHandler(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

@@ -12,8 +12,11 @@ namespace game {
 
 using constants::GameSettings;
 
-enum WordStatus { UNREAL_WORD, WRONG_WORD, RIGHT_WORD };
-enum LetterStatus { NONE, WRONG_PLACE, CORRECT };
+enum class WordStatus { UNREAL_WORD, WRONG_WORD, RIGHT_WORD };
+enum class LetterStatus { NONE, WRONG_PLACE, CORRECT };
+
+std::string WordStatusToString(const WordStatus& status);
+std::string LetterStatusToString(const LetterStatus& status);
 
 struct WordCheckout {
   WordStatus status;

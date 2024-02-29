@@ -16,7 +16,7 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
   }
 
   if (!IsRealWord(user_answer)) {
-    return {UNREAL_WORD};
+    return {WordStatus::UNREAL_WORD};
   }
 
   WordCheckout result{};
@@ -27,26 +27,52 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
   }
 
   size_t i = 0;
-  result.status = RIGHT_WORD;
+  result.status = WordStatus::RIGHT_WORD;
 
   for (const auto &letter : user_answer) {
     if (alphabet[letter] > 0) {
       --alphabet[letter];
 
       if (secret_word[i] == letter) {
-        result.letters[i] = CORRECT;
+        result.letters[i] = LetterStatus::CORRECT;
       } else {
-        result.status = WRONG_WORD;
-        result.letters[i] = WRONG_PLACE;
+        result.status = WordStatus::WRONG_WORD;
+        result.letters[i] = LetterStatus::WRONG_PLACE;
       }
     } else {
-      result.status = WRONG_WORD;
+      result.status = WordStatus::WRONG_WORD;
     }
 
     ++i;
   }
 
   return result;
+}
+
+std::string WordStatusToString(const game::WordStatus& status) {
+  switch (status) {
+    case WordStatus::UNREAL_WORD:
+      return "UNREAL_WORD";
+    case WordStatus::WRONG_WORD:
+      return "WRONG_WORD";
+    case WordStatus::RIGHT_WORD:
+      return "RIGHT_WORD";
+    default:
+      return "UNKNOWN_WORD_STATUS";
+  }
+}
+
+std::string LetterStatusToString(const LetterStatus& status) {
+  switch (status) {
+    case LetterStatus::NONE:
+      return "NONE";
+    case LetterStatus::WRONG_PLACE:
+      return "WRONG_PLACE";
+    case LetterStatus::CORRECT:
+      return "CORRECT";
+    default:
+      return "UNKNOWN_LETTER_STATUS";
+  }
 }
 
 }  // namespace game
