@@ -9,10 +9,10 @@ async def test_start(service_client):
 
 
 async def test_first_time_users(service_client):
-    token = await service_client.post('v1/start').text
+    token_response = await service_client.post('v1/start')
 
     response = await service_client.post(
         '/v1/check',
-        params={'token': token, 'word': 'horse'},
+        params={'token': token_response.text, 'word': 'horse'},
     )
     assert response.status == 200
