@@ -6,4 +6,4 @@ is-testing: false
 
 server-port: 8080
 
-dbconnection: 'postgresql://user:password@service-postgres:5432/wordle_db_1'
+dbconnection: 'postgresql://user:password@service-postgres:5432/wordle_db-1'
