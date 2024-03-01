@@ -5,7 +5,7 @@ async def test_start(service_client):
         '/v1/start',
     )
     assert response.status == 200
-    assert len(response.text) == 14
+    assert len(response.text) == 32
 
 
 async def test_first_time_users(service_client):
