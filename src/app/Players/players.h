@@ -12,6 +12,8 @@ class IPlayers {
   virtual size_t GetPlayersAmount() const = 0;
 
   virtual bool IsTokenExist(const Token &token) const = 0;
+
+  virtual ~IPlayers() = default;
 };
 
 }  // namespace app

@@ -1,20 +1,22 @@
 #include <userver/utest/utest.hpp>
 
-#include "infrastructure/naive_dictionary.h"
 #include "domain/game.h"
+#include "infrastructure/naive_dictionary.h"
 
 namespace {
 
-using game::CORRECT;
-using game::WRONG_PLACE;
-using game::NONE;
+using game::LetterStatus;
+using game::WordStatus;
+
+using game::LetterStatus::CORRECT;
+using game::LetterStatus::NONE;
+using game::LetterStatus::WRONG_PLACE;
 
 }  // namespace
 
-
 UTEST(IsRealWord, RealWords) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   ASSERT_TRUE(game.IsRealWord("words"));
   ASSERT_TRUE(game.IsRealWord("horse"));
@@ -22,7 +24,7 @@ UTEST(IsRealWord, RealWords) {
 
 UTEST(IsRealWord, UnrealWords) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   ASSERT_FALSE(game.IsRealWord("cbrfj"));
   ASSERT_FALSE(game.IsRealWord("abfkj"));
@@ -30,7 +32,7 @@ UTEST(IsRealWord, UnrealWords) {
 
 UTEST(IsRealWord, WrongSizeWords) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   ASSERT_FALSE(game.IsRealWord(""));
   ASSERT_FALSE(game.IsRealWord("a"));
@@ -39,7 +41,7 @@ UTEST(IsRealWord, WrongSizeWords) {
 
 UTEST(CheckWord, Correct) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   auto result = game.CheckWord("words", "words");
   auto answer = std::array<game::LetterStatus, 5>{CORRECT, CORRECT, CORRECT, CORRECT, CORRECT};
@@ -50,7 +52,7 @@ UTEST(CheckWord, Correct) {
 
 UTEST(CheckWord, AlmostCorrect) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   auto result = game.CheckWord("horse", "words");
   auto answer = std::array<game::LetterStatus, 5>{NONE, CORRECT, CORRECT, WRONG_PLACE, NONE};
@@ -61,7 +63,7 @@ UTEST(CheckWord, AlmostCorrect) {
 
 UTEST(CheckWord, WrongPlace) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "clang"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   auto result = game.CheckWord("apple", "clang");
   auto answer = std::array<game::LetterStatus, 5>{WRONG_PLACE, NONE, NONE, WRONG_PLACE, NONE};
@@ -72,7 +74,7 @@ UTEST(CheckWord, WrongPlace) {
 
 UTEST(CheckWord, TotallyIncorrect) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "clang"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   auto result = game.CheckWord("apple", "words");
   auto answer = std::array<game::LetterStatus, 5>{NONE, NONE, NONE, NONE, NONE};
@@ -83,7 +85,7 @@ UTEST(CheckWord, TotallyIncorrect) {
 
 UTEST(CheckWord, UnrealWord) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "clang"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   auto result = game.CheckWord("cbjkf", "words");
   auto answer = std::array<game::LetterStatus, 5>{NONE, NONE, NONE, NONE, NONE};
@@ -94,14 +96,14 @@ UTEST(CheckWord, UnrealWord) {
 
 UTEST(CheckWord, WrongSizeSecretWord) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "clang"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   ASSERT_THROW(game.CheckWord("apple", "terminal"), std::runtime_error);
 }
 
 UTEST(GetRandomWord, RandomWordsIsReal) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse"}));
-  game::Game game(std::move(dict));
+  game::Game game(*dict);
 
   ASSERT_TRUE(game.IsRealWord(game.GetRandomWord()));
   ASSERT_TRUE(game.IsRealWord(game.GetRandomWord()));
