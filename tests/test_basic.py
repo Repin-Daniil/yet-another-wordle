@@ -1,5 +1,6 @@
 # Start the tests via `make test-debug` or `make test-release`
 
+
 async def test_start(service_client):
     response = await service_client.post(
         '/v1/start',
@@ -8,7 +9,7 @@ async def test_start(service_client):
     assert len(response.text) == 32
 
 
-async def test_first_time_users(service_client):
+async def test_check(service_client):
     token_response = await service_client.post('v1/start')
 
     response = await service_client.post(
