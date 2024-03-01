@@ -7,11 +7,6 @@ namespace {
 
 using game::LetterStatus;
 using game::WordStatus;
-
-using game::LetterStatus::CORRECT;
-using game::LetterStatus::NONE;
-using game::LetterStatus::WRONG_PLACE;
-
 }  // namespace
 
 UTEST(IsRealWord, RealWords) {
@@ -44,7 +39,8 @@ UTEST(CheckWord, Correct) {
   game::Game game(*dict);
 
   auto result = game.CheckWord("words", "words");
-  auto answer = std::array<game::LetterStatus, 5>{CORRECT, CORRECT, CORRECT, CORRECT, CORRECT};
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::CORRECT, LetterStatus::CORRECT, LetterStatus::CORRECT,
+                                                  LetterStatus::CORRECT, LetterStatus::CORRECT};
 
   ASSERT_EQ(game::WordStatus::RIGHT_WORD, result.status);
   ASSERT_EQ(answer, result.letters);
@@ -55,7 +51,8 @@ UTEST(CheckWord, AlmostCorrect) {
   game::Game game(*dict);
 
   auto result = game.CheckWord("horse", "words");
-  auto answer = std::array<game::LetterStatus, 5>{NONE, CORRECT, CORRECT, WRONG_PLACE, NONE};
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::NONE, LetterStatus::CORRECT, LetterStatus::CORRECT,
+                                                  LetterStatus::WRONG_PLACE, LetterStatus::NONE};
 
   ASSERT_EQ(game::WordStatus::WRONG_WORD, result.status);
   ASSERT_EQ(answer, result.letters);
@@ -66,7 +63,8 @@ UTEST(CheckWord, WrongPlace) {
   game::Game game(*dict);
 
   auto result = game.CheckWord("apple", "clang");
-  auto answer = std::array<game::LetterStatus, 5>{WRONG_PLACE, NONE, NONE, WRONG_PLACE, NONE};
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::WRONG_PLACE, LetterStatus::NONE, LetterStatus::NONE,
+                                                  LetterStatus::WRONG_PLACE, LetterStatus::NONE};
 
   ASSERT_EQ(game::WordStatus::WRONG_WORD, result.status);
   ASSERT_EQ(answer, result.letters);
@@ -77,7 +75,8 @@ UTEST(CheckWord, TotallyIncorrect) {
   game::Game game(*dict);
 
   auto result = game.CheckWord("apple", "words");
-  auto answer = std::array<game::LetterStatus, 5>{NONE, NONE, NONE, NONE, NONE};
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::NONE, LetterStatus::NONE, LetterStatus::NONE,
+                                                  LetterStatus::NONE, LetterStatus::NONE};
 
   ASSERT_EQ(game::WordStatus::WRONG_WORD, result.status);
   ASSERT_EQ(answer, result.letters);
@@ -88,7 +87,8 @@ UTEST(CheckWord, UnrealWord) {
   game::Game game(*dict);
 
   auto result = game.CheckWord("cbjkf", "words");
-  auto answer = std::array<game::LetterStatus, 5>{NONE, NONE, NONE, NONE, NONE};
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::NONE, LetterStatus::NONE, LetterStatus::NONE,
+                                                  LetterStatus::NONE, LetterStatus::NONE};
 
   ASSERT_EQ(game::WordStatus::UNREAL_WORD, result.status);
   ASSERT_EQ(answer, result.letters);
