@@ -72,11 +72,8 @@ std::string CheckHandler::HandleRequestThrow(const userver::server::http::HttpRe
     result = app_.CheckWord(token, word);
 
   } catch (const std::invalid_argument& e) {
-    request.SetResponseStatus(userver::server::http::HttpStatus::kBadRequest);
     throw server::handlers::ClientError(server::handlers::ExternalBody{e.what()});
   } catch (const app::CheckWordError& error) {
-    request.SetResponseStatus(userver::server::http::HttpStatus::kInternalServerError);
-
     if (error.reason == app::CheckWordErrorReason::UNREAL_TOKEN) {
       throw server::handlers::ClientError(server::handlers::ExternalBody{"Token is not real!"s});
     } else if (error.reason == app::CheckWordErrorReason::UNREAL_WORD) {

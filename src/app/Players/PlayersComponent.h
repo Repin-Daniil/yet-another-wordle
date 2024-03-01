@@ -23,7 +23,6 @@ class PlayersComponent : public userver::components::LoggableComponentBase {
 
  private:
   std::unique_ptr<IPlayers> players_;
-
 };
 
 void AppendPlayers(userver::components::ComponentList& component_list);
