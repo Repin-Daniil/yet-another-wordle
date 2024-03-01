@@ -18,6 +18,7 @@ async def test_check(service_client):
     )
     assert response.status == 200
 
+
 async def test_check_unreal_token(service_client):
     token_response = await service_client.post('v1/start')
 
@@ -26,6 +27,7 @@ async def test_check_unreal_token(service_client):
         params={'token': "unreal_token", 'word': 'apple'},
     )
     assert response.status == 400
+
 
 async def test_check_unreal_word(service_client):
     token_response = await service_client.post('v1/start')
@@ -36,6 +38,7 @@ async def test_check_unreal_word(service_client):
     )
     assert response.status == 400
 
+
 async def test_check_no_token(service_client):
     token_response = await service_client.post('v1/start')
 
@@ -44,6 +47,7 @@ async def test_check_no_token(service_client):
         params={'word': 'unreal'},
     )
     assert response.status == 400
+
 
 async def test_check_no_word(service_client):
     token_response = await service_client.post('v1/start')
