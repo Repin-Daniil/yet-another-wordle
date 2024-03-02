@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "userver/clients/http/client.hpp"
 #include "userver/clients/http/component.hpp"
 #include "userver/components/component_list.hpp"
@@ -16,10 +18,10 @@ class PlayersComponent : public userver::components::LoggableComponentBase {
   static constexpr std::string_view kName = "players";
 
   PlayersComponent(const userver::components::ComponentConfig& config,
-              const userver::components::ComponentContext& context);
-  ~PlayersComponent()  = default;
+                   const userver::components::ComponentContext& context);
+  ~PlayersComponent() = default;
 
-  IPlayers &GetPlayers();
+  IPlayers& GetPlayers();
 
  private:
   std::unique_ptr<IPlayers> players_;
@@ -27,4 +29,4 @@ class PlayersComponent : public userver::components::LoggableComponentBase {
 
 void AppendPlayers(userver::components::ComponentList& component_list);
 
-}  // namespace user_manager
+}  // namespace app

@@ -1,7 +1,5 @@
 #include "check_handler.hpp"
 
-#include <iostream>
-
 namespace {
 
 using namespace userver;
@@ -33,7 +31,8 @@ userver::formats::json::Value Serialize(const game::WordCheckout& checkout,
                                         userver::formats::serialize::To<userver::formats::json::Value>) {
   userver::formats::json::ValueBuilder builder;
 
-  builder["WordStatus"] = userver::formats::json::ValueBuilder(checkout.status).ExtractValue();
+  builder["word"] = userver::formats::json::ValueBuilder(checkout.word).ExtractValue();
+  builder["status"] = userver::formats::json::ValueBuilder(checkout.status).ExtractValue();
   builder["letters"] = userver::formats::json::ValueBuilder(checkout.letters).ExtractValue();
 
   return builder.ExtractValue();
@@ -70,7 +69,6 @@ std::string CheckHandler::HandleRequestThrow(const userver::server::http::HttpRe
     CheckArgument(word, "word");
 
     result = app_.CheckWord(token, word);
-
   } catch (const std::invalid_argument& e) {
     throw server::handlers::ClientError(server::handlers::ExternalBody{e.what()});
   } catch (const app::CheckWordError& error) {

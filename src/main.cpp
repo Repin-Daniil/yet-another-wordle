@@ -5,11 +5,11 @@
 #include <userver/testsuite/testsuite_support.hpp>
 #include <userver/utils/daemon_run.hpp>
 
+#include "app/Players/players_component.h"
 #include "app/application.h"
-#include "app/Players/PlayersComponent.h"
-#include "infrastructure/dictionary_component.h"
-#include "handlers/StartGame/start_game_handler.hpp"
 #include "handlers/CheckWord/check_handler.hpp"
+#include "handlers/StartGame/start_game_handler.hpp"
+#include "infrastructure/dictionary_component.h"
 
 int main(int argc, char* argv[]) {
   auto component_list = userver::components::MinimalServerComponentList()

@@ -1,13 +1,15 @@
 #pragma once
 
+#include <string>
+
+#include <userver/formats/json/value.hpp>
+#include <userver/formats/json/value_builder.hpp>
+#include <userver/formats/serialize/common_containers.hpp>
 #include "userver/clients/http/client.hpp"
 #include "userver/clients/http/component.hpp"
 #include "userver/components/component_list.hpp"
 #include "userver/components/minimal_server_component_list.hpp"
 #include "userver/server/handlers/http_handler_base.hpp"
-#include <userver/formats/json/value.hpp>
-#include <userver/formats/json/value_builder.hpp>
-#include <userver/formats/serialize/common_containers.hpp>
 
 #include "app/application.h"
 
@@ -22,15 +24,13 @@ class CheckHandler final : public server::handlers::HttpHandlerBase {
 
   using HttpHandlerBase::HttpHandlerBase;
 
-  CheckHandler(const components::ComponentConfig& config,
-               const components::ComponentContext& context);
+  CheckHandler(const components::ComponentConfig& config, const components::ComponentContext& context);
 
-  std::string HandleRequestThrow(
-      const userver::server::http::HttpRequest& request,
-      userver::server::request::RequestContext& context) const override;
+  std::string HandleRequestThrow(const userver::server::http::HttpRequest& request,
+                                 userver::server::request::RequestContext& context) const override;
 
  private:
-  app::Application &app_;
+  app::Application& app_;
 };
 
 void AppendCheckHandler(userver::components::ComponentList& component_list);

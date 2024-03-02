@@ -2,6 +2,7 @@
 
 #include <array>
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <utility>
 
@@ -21,6 +22,7 @@ std::string LetterStatusToString(const LetterStatus& status);
 struct WordCheckout {
   WordStatus status;
   std::array<LetterStatus, GameSettings::WORD_LENGTH> letters;
+  std::string_view word;
 };
 
 /**
@@ -29,15 +31,15 @@ struct WordCheckout {
  */
 class Game {
  public:
-  explicit Game(IDictionary &dict) : dict_(dict){
+  explicit Game(IDictionary& dict) : dict_(dict) {
   }
 
-  std::string_view GetRandomWord() const;
-  WordCheckout CheckWord(std::string_view user_answer, std::string_view word) const;
-  bool IsRealWord(std::string_view word) const;
+  [[nodiscard]] std::string_view GetRandomWord() const;
+  [[nodiscard]] WordCheckout CheckWord(std::string_view user_answer, std::string_view word) const;
+  [[nodiscard]] bool IsRealWord(std::string_view word) const;
 
  private:
-  IDictionary &dict_;
+  IDictionary& dict_;
 };
 
 }  // namespace game

@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-
+#include <utility>
 
 #include "domain/game.h"
 

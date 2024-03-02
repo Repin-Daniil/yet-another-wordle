@@ -1,4 +1,4 @@
-#include "PlayersComponent.h"
+#include "players_component.h"
 
 namespace {
 

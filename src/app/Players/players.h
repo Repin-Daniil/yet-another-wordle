@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "app/Players/player.h"
 
 namespace app {

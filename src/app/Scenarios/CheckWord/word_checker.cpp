@@ -1,4 +1,4 @@
-#include "check_word.h"
+#include "word_checker.h"
 
 namespace app {
 
@@ -29,7 +29,6 @@ CheckWordResult WordChecker::Check(const Token& token, std::string_view word) {
 
     player->ChangeSecretWord(new_word);  // TODO Потом вызывать здесь session->NextWord()
   }
-
 
   return result;
 }

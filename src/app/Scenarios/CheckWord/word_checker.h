@@ -1,11 +1,13 @@
 #pragma once
 
+#include <vector>
+
 #include "app/Players/players.h"
 #include "domain/game.h"
 
 namespace app {
 
-enum class CheckWordErrorReason {UNREAL_TOKEN, UNREAL_WORD};
+enum class CheckWordErrorReason { UNREAL_TOKEN, UNREAL_WORD };
 
 struct CheckWordError {
   CheckWordErrorReason reason;

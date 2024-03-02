@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "userver/clients/http/client.hpp"
 #include "userver/clients/http/component.hpp"
 #include "userver/components/component_list.hpp"
@@ -19,12 +21,10 @@ class GameStarterHandler final : public server::handlers::HttpHandlerBase {
 
   using HttpHandlerBase::HttpHandlerBase;
 
-  GameStarterHandler(const components::ComponentConfig& config,
-               const components::ComponentContext& context);
+  GameStarterHandler(const components::ComponentConfig& config, const components::ComponentContext& context);
 
-  std::string HandleRequestThrow(
-      const userver::server::http::HttpRequest& request,
-      userver::server::request::RequestContext& context) const override;
+  std::string HandleRequestThrow(const userver::server::http::HttpRequest& request,
+                                 userver::server::request::RequestContext& context) const override;
 
  private:
   app::Application& app_;
@@ -32,4 +32,4 @@ class GameStarterHandler final : public server::handlers::HttpHandlerBase {
 
 void AppendGameStarterHandler(userver::components::ComponentList& component_list);
 
-}  // namespace service_template
+}  // namespace handlers

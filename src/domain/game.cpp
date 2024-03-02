@@ -16,7 +16,7 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
   }
 
   if (!IsRealWord(user_answer)) {
-    return {WordStatus::UNREAL_WORD, {}};
+    return {WordStatus::UNREAL_WORD, {}, {}};
   }
 
   WordCheckout result{};
@@ -28,6 +28,7 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
 
   size_t i = 0;
   result.status = WordStatus::RIGHT_WORD;
+  result.word = user_answer;
 
   for (const auto &letter : user_answer) {
     if (alphabet[letter] > 0) {

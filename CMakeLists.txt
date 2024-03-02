@@ -34,15 +34,16 @@ add_library(${PROJECT_NAME}_objs
         src/app/Players/player.cpp
         src/app/Players/player.h
         src/app/Players/players.h
-        src/app/Players/PlayersComponent.h
-        src/app/Players/PlayersComponent.cpp
+        src/app/Players/players_component.h
+        src/app/Players/players_component.cpp
         src/app/Players/Naive/naive_players.h
         src/app/Players/Naive/naive_players.cpp
 
         src/app/Scenarios/scenarios.h
-        src/app/Scenarios/scenarios.cpp
-        src/app/Scenarios/check_word.h
-        src/app/Scenarios/check_word.cpp
+        src/app/Scenarios/CheckWord/word_checker.h
+        src/app/Scenarios/CheckWord/word_checker.cpp
+        src/app/Scenarios/StartGame/game_starter.h
+        src/app/Scenarios/StartGame/game_starter.cpp
 
         src/handlers/StartGame/start_game_handler.hpp
         src/handlers/StartGame/start_game_handler.cpp
@@ -60,8 +61,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 # Unit Tests
 add_executable(${PROJECT_NAME}_unittest
-tests/unit_tests/game_test.cpp
-)
+        tests/unit_tests/game_test.cpp
+        )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
 add_google_tests(${PROJECT_NAME}_unittest)
 
