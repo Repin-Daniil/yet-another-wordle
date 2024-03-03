@@ -94,6 +94,18 @@ UTEST(CheckWord, UnrealWord) {
   ASSERT_EQ(answer, result.letters);
 }
 
+UTEST(CheckWord, OnlyOneLetterShouldBeCorrect) {
+  std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "creep"}));
+  game::Game game(*dict);
+
+  auto result = game.CheckWord("apple", "creep");
+  auto answer = std::array<game::LetterStatus, 5>{LetterStatus::NONE, LetterStatus::WRONG_PLACE, LetterStatus::NONE,
+                                                  LetterStatus::NONE, LetterStatus::WRONG_PLACE};
+
+  ASSERT_EQ(game::WordStatus::WRONG_WORD, result.status);
+  ASSERT_EQ(answer, result.letters);
+}
+
 UTEST(CheckWord, WrongSizeSecretWord) {
   std::unique_ptr<game::IDictionary> dict(new infrastructure::NaiveDictionary({"words", "apple", "horse", "clang"}));
   game::Game game(*dict);

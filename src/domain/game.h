@@ -34,9 +34,9 @@ class Game {
   explicit Game(IDictionary& dict) : dict_(dict) {
   }
 
-  [[nodiscard]] std::string_view GetRandomWord() const;
-  [[nodiscard]] WordCheckout CheckWord(std::string_view user_answer, std::string_view word) const;
-  [[nodiscard]] bool IsRealWord(std::string_view word) const;
+  std::string_view GetRandomWord() const;
+  WordCheckout CheckWord(std::string_view user_answer, std::string_view word) const;
+  bool IsRealWord(std::string_view word) const;
 
  private:
   IDictionary& dict_;

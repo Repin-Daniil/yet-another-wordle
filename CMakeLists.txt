@@ -29,25 +29,24 @@ add_library(${PROJECT_NAME}_objs
         src/infrastructure/naive_dictionary.h
         src/infrastructure/naive_dictionary.cpp
 
-        src/app/application.cpp
         src/app/application.h
-        src/app/Players/player.cpp
-        src/app/Players/player.h
-        src/app/Players/players.h
-        src/app/Players/players_component.h
-        src/app/Players/players_component.cpp
-        src/app/Players/Naive/naive_players.h
-        src/app/Players/Naive/naive_players.cpp
-
+        src/app/application.cpp
         src/app/Scenarios/scenarios.h
         src/app/Scenarios/CheckWord/word_checker.h
         src/app/Scenarios/CheckWord/word_checker.cpp
         src/app/Scenarios/StartGame/game_starter.h
         src/app/Scenarios/StartGame/game_starter.cpp
 
+        src/app/Players/players.h
+        src/app/Players/player.cpp
+        src/app/Players/player.h
+        src/app/Players/players_component.h
+        src/app/Players/players_component.cpp
+        src/app/Players/Naive/naive_players.h
+        src/app/Players/Naive/naive_players.cpp
+
         src/handlers/StartGame/start_game_handler.hpp
         src/handlers/StartGame/start_game_handler.cpp
-
         src/handlers/CheckWord/check_handler.hpp
         src/handlers/CheckWord/check_handler.cpp
         )
