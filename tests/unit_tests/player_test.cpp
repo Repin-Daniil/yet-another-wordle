@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <iostream>
 
-#include "app/Players/player.h"
+#include "app/Players/Naive/player.h"
 
 namespace {
 

@@ -24,10 +24,10 @@ add_library(${PROJECT_NAME}_objs
         src/domain/game.cpp
 
         src/domain/dictionary.h
-        src/infrastructure/dictionary_component.h
-        src/infrastructure/dictionary_component.cpp
-        src/infrastructure/naive_dictionary.h
-        src/infrastructure/naive_dictionary.cpp
+        src/infrastructure/dictionary/in-memory/naive_dictionary.h
+        src/infrastructure/dictionary/in-memory/naive_dictionary.cpp
+        src/infrastructure/dictionary/dictionary_component.h
+        src/infrastructure/dictionary/dictionary_component.cpp
 
         src/app/application.h
         src/app/application.cpp
@@ -37,13 +37,14 @@ add_library(${PROJECT_NAME}_objs
         src/app/Scenarios/StartGame/game_starter.h
         src/app/Scenarios/StartGame/game_starter.cpp
 
-        src/app/Players/players.h
-        src/app/Players/player.cpp
         src/app/Players/player.h
-        src/app/Players/players_component.h
-        src/app/Players/players_component.cpp
-        src/app/Players/Naive/naive_players.h
-        src/app/Players/Naive/naive_players.cpp
+        src/app/Players/players.h
+        src/infrastructure/players/players_component.h
+        src/infrastructure/players/players_component.cpp
+        src/infrastructure/players/in-memory/naive_player.h
+        src/infrastructure/players/in-memory/naive_player.cpp
+        src/infrastructure/players/in-memory/naive_players.h
+        src/infrastructure/players/in-memory/naive_players.cpp
 
         src/handlers/StartGame/start_game_handler.hpp
         src/handlers/StartGame/start_game_handler.cpp
@@ -83,11 +84,11 @@ userver_testsuite_add_simple()
 # Install
 include(GNUInstallDirs)
 
-if(DEFINED ENV{PREFIX})
-  message(STATUS "Set install prefix: $ENV{PREFIX}")
-  file(TO_CMAKE_PATH "$ENV{PREFIX}" PREFIX_PATH)
-  set(CMAKE_INSTALL_PREFIX ${PREFIX_PATH})
-endif()
+if (DEFINED ENV{PREFIX})
+    message(STATUS "Set install prefix: $ENV{PREFIX}")
+    file(TO_CMAKE_PATH "$ENV{PREFIX}" PREFIX_PATH)
+    set(CMAKE_INSTALL_PREFIX ${PREFIX_PATH})
+endif ()
 
 file(GLOB CONFIGS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/configs/*.yaml ${CMAKE_CURRENT_SOURCE_DIR}/configs/*.json)
 

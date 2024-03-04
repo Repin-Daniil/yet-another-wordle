@@ -9,9 +9,9 @@
 #include "userver/storages/postgres/component.hpp"
 #include "userver/utils/assert.hpp"
 
-#include "app/Players/Naive/naive_players.h"
+#include "infrastructure/players/in-memory/naive_players.h"
 
-namespace app {
+namespace infrastructure {
 
 class PlayersComponent : public userver::components::LoggableComponentBase {
  public:
@@ -21,12 +21,12 @@ class PlayersComponent : public userver::components::LoggableComponentBase {
                    const userver::components::ComponentContext& context);
   ~PlayersComponent() = default;
 
-  IPlayers& GetPlayers();
+  app::IPlayers& GetPlayers();
 
  private:
-  std::unique_ptr<IPlayers> players_;
+  std::unique_ptr<app::IPlayers> players_;
 };
 
 void AppendPlayers(userver::components::ComponentList& component_list);
 
-}  // namespace app
+}  // namespace infrastructure

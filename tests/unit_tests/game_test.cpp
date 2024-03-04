@@ -1,12 +1,13 @@
 #include <userver/utest/utest.hpp>
 
 #include "domain/game.h"
-#include "infrastructure/naive_dictionary.h"
+#include "infrastructure/dictionary/in-memory/naive_dictionary.h"
 
 namespace {
 
 using game::LetterStatus;
 using game::WordStatus;
+
 }  // namespace
 
 UTEST(IsRealWord, RealWords) {

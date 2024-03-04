@@ -1,7 +1,7 @@
 #include <userver/utest/utest.hpp>
 
 #include "app/application.h"
-#include "infrastructure/naive_dictionary.h"
+#include "infrastructure/dictionary/naive/naive_dictionary.h"
 
 namespace {
 

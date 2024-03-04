@@ -13,7 +13,7 @@ Application::Application(const components::ComponentConfig& config, const compon
     : LoggableComponentBase(config, context),
       game_(context.FindComponent<infrastructure::DictionaryComponent>().GetDictionary()),
       pg_cluster_(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()),
-      players_(context.FindComponent<app::PlayersComponent>().GetPlayers()),
+      players_(context.FindComponent<infrastructure::PlayersComponent>().GetPlayers()),
       game_starter_(game_, players_),
       word_checker_(game_, players_) {
 }

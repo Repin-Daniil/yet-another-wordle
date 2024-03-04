@@ -15,10 +15,10 @@
 #include "userver/utils/assert.hpp"
 #include <userver/formats/serialize/common_containers.hpp>
 
-#include "app/Players/players_component.h"
 #include "app/Scenarios/scenarios.h"
 #include "domain/game.h"
-#include "infrastructure/dictionary_component.h"
+#include "infrastructure/dictionary/dictionary_component.h"
+#include "infrastructure/players/players_component.h"
 
 namespace app {
 

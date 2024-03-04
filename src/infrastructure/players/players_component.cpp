@@ -7,7 +7,7 @@ using namespace std::literals;
 
 }  // namespace
 
-namespace app {
+namespace infrastructure {
 
 PlayersComponent::PlayersComponent(const components::ComponentConfig& config,
                                    const components::ComponentContext& context)
@@ -19,7 +19,7 @@ void AppendPlayers(userver::components::ComponentList& component_list) {
   component_list.Append<PlayersComponent>();
 }
 
-IPlayers& PlayersComponent::GetPlayers() {
+app::IPlayers& PlayersComponent::GetPlayers() {
   return *players_;
 }
-}  // namespace app
+}  // namespace infrastructure
