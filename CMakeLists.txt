@@ -50,7 +50,7 @@ add_library(${PROJECT_NAME}_objs
         src/handlers/StartGame/start_game_handler.cpp
         src/handlers/CheckWord/check_handler.hpp
         src/handlers/CheckWord/check_handler.cpp
-        )
+        src/app/Sessions/game_session.cpp src/app/Sessions/game_session.h)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 
