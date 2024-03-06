@@ -10,10 +10,15 @@ namespace app {
 
 using Token = std::string;
 
+struct AddAttemptResult {
+  std::vector<game::WordCheckout> attempts;
+  bool is_new_word_set = false;
+};
+
 class IPlayer {
  public:
-    virtual void AddAttempt(game::WordCheckout attempt) = 0;
-    virtual void ChangeSecretWord(std::string_view new_secret_word) noexcept = 0;
+    virtual AddAttemptResult AddAttempt(game::WordCheckout attempt) = 0;
+//    virtual void ChangeSecretWord(std::string_view new_secret_word) noexcept = 0;
 
     virtual int GetAttemptsAmount() const noexcept = 0;
     virtual int GetRemainingAttemptsAmount() const noexcept = 0;

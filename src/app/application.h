@@ -37,7 +37,7 @@ class Application : public userver::components::LoggableComponentBase {
   game::Game& GetGame();
 
  private:
-  game::Game game_;
+  game::Game game_eng_;
   userver::storages::postgres::ClusterPtr pg_cluster_;
   IPlayers& players_;
 

@@ -14,6 +14,7 @@
 
 #include "app/Players/player.h"
 #include "app/Players/players.h"
+#include "app/Sessions/game_session.h"
 #include "infrastructure/players/in-memory/memory_mapped_player.h"
 
 namespace infrastructure {
@@ -37,7 +38,7 @@ struct TokenGenerator {
 
 class MemoryMappedPlayers : public app::IPlayers {
  public:
-  std::shared_ptr<app::IPlayer> AddPlayer(std::string_view secret_word) override;
+  std::shared_ptr<app::IPlayer> AddPlayer(game::Game &game) override;
   std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) override;
 
  private:

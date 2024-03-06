@@ -5,18 +5,19 @@
 #include <vector>
 
 #include "app/Players/player.h"
+#include "app/Sessions/game_session.h"
 #include "domain/game.h"
 
 namespace infrastructure {
 
 class MemoryMappedPlayer : public app::IPlayer {
  public:
-  MemoryMappedPlayer(app::Token token, std::string_view secret_word)
-      : token_(std::move(token)), secret_word_(secret_word) {
+  MemoryMappedPlayer(app::Token token, app::GameSession session)
+      : token_(std::move(token)), session_(std::move(session)) {
   }
 
-  void AddAttempt(game::WordCheckout attempt) override;
-  void ChangeSecretWord(std::string_view new_secret_word) noexcept override;
+  app::AddAttemptResult AddAttempt(game::WordCheckout attempt) override;
+  //  void ChangeSecretWord(std::string_view new_secret_word) noexcept override;
 
   // Getters
   int GetAttemptsAmount() const noexcept override;
@@ -30,8 +31,8 @@ class MemoryMappedPlayer : public app::IPlayer {
 
  private:
   app::Token token_;
+  app::GameSession session_;
   std::vector<game::WordCheckout> attempts_;
-  std::string_view secret_word_;
 };
 
 }  // namespace infrastructure

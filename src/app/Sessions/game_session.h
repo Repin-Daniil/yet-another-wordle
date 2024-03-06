@@ -7,30 +7,38 @@
 
 namespace app {
 
+struct Word {
+  std::string_view value;
+  bool is_guessed;
+  int attempts_amount;
+};
+
 class WordsArchive {
  public:
-  void AddWord(std::string_view word);
-  bool IsContainWord(std::string_view word);
-  std::vector<std::string_view> GetWords();
+  void AddWord(Word word);
+  bool IsContainWord(std::string_view word) const noexcept;
+  std::vector<Word> GetWords() const noexcept;
 
  private:
-  std::vector<std::string_view> words_;
+  std::vector<Word> words_;
   std::unordered_set<std::string_view> words_set_;
 };
 
 class GameSession {
-  explicit GameSession(game::Game& game, uint64_t id) : game_(game), session_id_(id) {
-    secret_words_.AddWord(game_.GetRandomWord());
+ public:
+  GameSession(game::Game& game, const Token& token)
+      : game_(game), current_secret_word_(game_.GetRandomWord()), player_token_(token) {
   }
 
-  std::string_view NextSecretWord();
+  void NextSecretWord(bool is_guessed, int attempts_amount);
   std::string_view GetSecretWord() const noexcept;
-  std::vector<std::string_view> GetSecretWordsHistory() const noexcept;
+  std::vector<Word> GetSecretWordsHistory() const noexcept;
 
  private:
   game::Game& game_;
-  uint64_t session_id_;
-  WordsArchive secret_words_;
+  std::string_view current_secret_word_;
+  Token player_token_;
+  WordsArchive archive_;
 };
 
 }  // namespace app

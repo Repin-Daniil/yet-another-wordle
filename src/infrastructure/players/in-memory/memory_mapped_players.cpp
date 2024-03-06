@@ -14,13 +14,13 @@ std::string TokenGenerator::GenerateNewToken() {
   return ss.str();
 }
 
-std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(std::string_view secret_word) {
+std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(game::Game &game) {
   auto token = token_generator_.GenerateNewToken();
-  auto player_ptr = players_.Emplace(token, token, secret_word);
+  auto player_ptr = players_.Emplace(token, token, app::GameSession(game, token));
 
   while (!player_ptr.inserted) {
     token = token_generator_.GenerateNewToken();
-    player_ptr = players_.Emplace(token, token, secret_word);
+    auto player_ptr = players_.Emplace(token, token, app::GameSession(game, token));
   }
 
   return player_ptr.value;
