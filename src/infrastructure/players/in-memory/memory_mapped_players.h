@@ -10,16 +10,15 @@
 #include <utility>
 #include <vector>
 
+#include <userver/rcu/rcu_map.hpp>
+
 #include "app/Players/player.h"
 #include "app/Players/players.h"
-#include "infrastructure/players/in-memory/naive_player.h"
+#include "app/Sessions/game_session.h"
+#include "infrastructure/players/in-memory/memory_mapped_player.h"
 
 namespace infrastructure {
 
-/**
- * @brief Генератор токенов для пользователей
- * @todo Заменить на boost.uuid
- */
 struct TokenGenerator {
  public:
   app::Token GenerateNewToken();
@@ -37,20 +36,13 @@ struct TokenGenerator {
   }()};
 };
 
-/** In-memory playes.
- * @todo Прокинуть сюда engine::SharedMutex из компонента, чтобы убрать гонку при добавлении игроков в мапу
- */
-class NaivePlayers : public app::IPlayers {
+class MemoryMappedPlayers : public app::IPlayers {
  public:
-  std::shared_ptr<app::IPlayer> AddPlayer(std::string_view secret_word) override;
-
-  std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) const override;
-  size_t GetPlayersAmount() const override;
-
-  bool IsTokenExist(const app::Token& token) const override;
+  std::shared_ptr<app::IPlayer> AddPlayer(game::Game &game) override;
+  std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) override;
 
  private:
-  std::unordered_map<std::string, std::shared_ptr<NaivePlayer>> players_;
+  userver::rcu::RcuMap<std::string, MemoryMappedPlayer> players_;
   TokenGenerator token_generator_;
 };
 

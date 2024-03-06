@@ -41,16 +41,16 @@ add_library(${PROJECT_NAME}_objs
         src/app/Players/players.h
         src/infrastructure/players/players_component.h
         src/infrastructure/players/players_component.cpp
-        src/infrastructure/players/in-memory/naive_player.h
-        src/infrastructure/players/in-memory/naive_player.cpp
-        src/infrastructure/players/in-memory/naive_players.h
-        src/infrastructure/players/in-memory/naive_players.cpp
+        src/infrastructure/players/in-memory/memory_mapped_player.h
+        src/infrastructure/players/in-memory/memory_mapped_player.cpp
+        src/infrastructure/players/in-memory/memory_mapped_players.h
+        src/infrastructure/players/in-memory/memory_mapped_players.cpp
 
         src/handlers/StartGame/start_game_handler.hpp
         src/handlers/StartGame/start_game_handler.cpp
         src/handlers/CheckWord/check_handler.hpp
         src/handlers/CheckWord/check_handler.cpp
-        )
+        src/app/Sessions/game_session.cpp src/app/Sessions/game_session.h)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 

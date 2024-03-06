@@ -11,11 +11,11 @@ namespace app {
 
 Application::Application(const components::ComponentConfig& config, const components::ComponentContext& context)
     : LoggableComponentBase(config, context),
-      game_(context.FindComponent<infrastructure::DictionaryComponent>().GetDictionary()),
+      game_eng_(context.FindComponent<infrastructure::DictionaryComponent>().GetDictionary()),
       pg_cluster_(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()),
       players_(context.FindComponent<infrastructure::PlayersComponent>().GetPlayers()),
-      game_starter_(game_, players_),
-      word_checker_(game_, players_) {
+      game_starter_(game_eng_, players_),
+      word_checker_(game_eng_, players_) {
 }
 
 IPlayers& Application::GetPlayers() {
@@ -23,11 +23,11 @@ IPlayers& Application::GetPlayers() {
 }
 
 game::Game& Application::GetGame() {
-  return game_;
+  return game_eng_;
 }
 
 Token Application::StartGame() {
-  return game_starter_.Start();  // Тут гонка в векторе с игроками будет. Потом почини
+  return game_starter_.Start();
 }
 
 CheckWordResult Application::CheckWord(const Token& token, std::string_view word) {

@@ -3,7 +3,7 @@
 namespace app {
 
 Token GameStarter::Start() {
-  auto player = players_.AddPlayer(game_.GetRandomWord());  // FIXME А вот здесь гонка!
+  auto player = players_.AddPlayer(game_);
 
   return player->GetToken();
 }
