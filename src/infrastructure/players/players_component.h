@@ -9,7 +9,7 @@
 #include "userver/storages/postgres/component.hpp"
 #include "userver/utils/assert.hpp"
 
-#include "infrastructure/players/in-memory/naive_players.h"
+#include "infrastructure/players/in-memory/memory_mapped_players.h"
 
 namespace infrastructure {
 

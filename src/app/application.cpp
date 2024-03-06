@@ -27,7 +27,7 @@ game::Game& Application::GetGame() {
 }
 
 Token Application::StartGame() {
-  return game_starter_.Start();  // Тут гонка в векторе с игроками будет. Потом почини
+  return game_starter_.Start();
 }
 
 CheckWordResult Application::CheckWord(const Token& token, std::string_view word) {

@@ -9,9 +9,9 @@
 
 namespace infrastructure {
 
-class NaivePlayer : public app::IPlayer {
+class MemoryMappedPlayer : public app::IPlayer {
  public:
-  NaivePlayer(app::Token token, std::string_view secret_word) : token_(std::move(token)), secret_word_(secret_word) {
+  MemoryMappedPlayer(app::Token token, std::string_view secret_word) : token_(std::move(token)), secret_word_(secret_word) {
   }
 
   void AddAttempt(game::WordCheckout attempt) override;
