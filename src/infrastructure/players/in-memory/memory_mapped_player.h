@@ -11,7 +11,8 @@ namespace infrastructure {
 
 class MemoryMappedPlayer : public app::IPlayer {
  public:
-  MemoryMappedPlayer(app::Token token, std::string_view secret_word) : token_(std::move(token)), secret_word_(secret_word) {
+  MemoryMappedPlayer(app::Token token, std::string_view secret_word)
+      : token_(std::move(token)), secret_word_(secret_word) {
   }
 
   void AddAttempt(game::WordCheckout attempt) override;

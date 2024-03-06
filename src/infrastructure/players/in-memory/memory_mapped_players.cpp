@@ -18,7 +18,7 @@ std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(std::string_view se
   auto token = token_generator_.GenerateNewToken();
   auto player_ptr = players_.Emplace(token, token, secret_word);
 
-  while(!player_ptr.inserted) {
+  while (!player_ptr.inserted) {
     token = token_generator_.GenerateNewToken();
     player_ptr = players_.Emplace(token, token, secret_word);
   }
