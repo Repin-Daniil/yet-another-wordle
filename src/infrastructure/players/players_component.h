@@ -7,6 +7,7 @@
 #include "userver/components/component_list.hpp"
 #include "userver/storages/postgres/cluster.hpp"
 #include "userver/storages/postgres/component.hpp"
+#include <userver/yaml_config/merge_schemas.hpp>
 #include "userver/utils/assert.hpp"
 
 #include "infrastructure/players/in-memory/memory_mapped_players.h"
@@ -22,6 +23,8 @@ class PlayersComponent : public userver::components::LoggableComponentBase {
   ~PlayersComponent() = default;
 
   app::IPlayers& GetPlayers();
+
+  static userver::yaml_config::Schema GetStaticConfigSchema();
 
  private:
   std::unique_ptr<app::IPlayers> players_;

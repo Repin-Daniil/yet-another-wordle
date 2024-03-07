@@ -16,7 +16,7 @@ struct CheckWordError {
 struct CheckWordResult {
   std::vector<game::WordCheckout> attempts;
   bool is_new_word = false;
-  int max_attempts_amount = constants::GameSettings::MAX_ATTEMPTS_AMOUNT;
+  int max_attempts_amount = constants::GameSettings::kMaxAttemptsAmount;
 };
 
 class WordChecker {

@@ -11,24 +11,21 @@
 
 namespace game {
 
-using constants::GameSettings;
-
 enum class WordStatus { UNREAL_WORD, WRONG_WORD, RIGHT_WORD };
 enum class LetterStatus { NONE, WRONG_PLACE, CORRECT };
 
 std::string WordStatusToString(const WordStatus& status);
 std::string LetterStatusToString(const LetterStatus& status);
 
+using constants::GameSettings;
+
 struct WordCheckout {
   WordStatus status;
-  std::array<LetterStatus, GameSettings::WORD_LENGTH> letters;
+  std::array<LetterStatus, GameSettings::kWordLength> letters;
   std::string_view word;
 };
 
-/**
- * @brief Yet another Wordle-game
- * @todo Игровую сессию, чтобы можно было загадывать определенные слова. И конфиг на эти слова
- */
+
 class Game {
  public:
   explicit Game(IDictionary& dict) : dict_(dict) {

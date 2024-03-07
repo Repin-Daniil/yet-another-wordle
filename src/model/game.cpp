@@ -3,7 +3,7 @@
 namespace game {
 
 bool Game::IsRealWord(std::string_view word) const {
-  return word.size() == constants::GameSettings::WORD_LENGTH && dict_.IsWordExist(word);
+  return word.size() == constants::GameSettings::kWordLength && dict_.IsWordExist(word);
 }
 
 std::string_view Game::GetRandomWord() const {
@@ -20,10 +20,10 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
   }
 
   WordCheckout result{};
-  std::unordered_map<char, int> alphabet;  // FIXME Rename
+  std::unordered_map<char, int> char_frequency_map;
 
   for (const auto &letter : secret_word) {
-    ++alphabet[letter];
+    ++char_frequency_map[letter];
   }
 
   size_t i = 0;
@@ -31,8 +31,8 @@ WordCheckout Game::CheckWord(std::string_view user_answer, std::string_view secr
   result.word = user_answer;
 
   for (const auto &letter : user_answer) {
-    if (alphabet[letter] > 0) {
-      --alphabet[letter];
+    if (char_frequency_map[letter] > 0) {
+      --char_frequency_map[letter];
 
       if (secret_word[i] == letter) {
         result.letters[i] = LetterStatus::CORRECT;

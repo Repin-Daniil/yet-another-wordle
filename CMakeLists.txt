@@ -45,12 +45,15 @@ add_library(${PROJECT_NAME}_objs
         src/infrastructure/players/in-memory/memory_mapped_player.cpp
         src/infrastructure/players/in-memory/memory_mapped_players.h
         src/infrastructure/players/in-memory/memory_mapped_players.cpp
+        src/app/players/game-session/game_session.h
+
+        src/app/players/game-session/game_session.cpp
 
         src/handlers/auth/start_game_handler.hpp
         src/handlers/auth/start_game_handler.cpp
         src/handlers/api/check_handler.hpp
-        src/handlers/api/check_handler.cpp
-        src/app/players/game-session/game_session.cpp src/app/players/game-session/game_session.h)
+        src/handlers/api/check_handler.cpp)
+
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 

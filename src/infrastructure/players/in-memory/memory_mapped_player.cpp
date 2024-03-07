@@ -23,7 +23,7 @@ void MemoryMappedPlayer::ResetAttempts() {
 }
 
 app::AddAttemptResult MemoryMappedPlayer::AddAttempt(game::WordCheckout attempt) {
-  if (GetAttemptsAmount() >= constants::GameSettings::MAX_ATTEMPTS_AMOUNT) {
+  if (GetAttemptsAmount() >= constants::GameSettings::kMaxAttemptsAmount) {
     throw std::runtime_error("Game Over! No attempts!");
   }
 
@@ -41,7 +41,7 @@ app::AddAttemptResult MemoryMappedPlayer::AddAttempt(game::WordCheckout attempt)
 }
 
 int MemoryMappedPlayer::GetRemainingAttemptsAmount() const noexcept {
-  return constants::GameSettings::MAX_ATTEMPTS_AMOUNT - GetAttemptsAmount();
+  return constants::GameSettings::kMaxAttemptsAmount - GetAttemptsAmount();
 }
 
 }  // namespace infrastructure
