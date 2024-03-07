@@ -4,9 +4,9 @@
 #include <utility>
 #include <vector>
 
-#include "app/Players/player.h"
-#include "app/Sessions/game_session.h"
-#include "domain/game.h"
+#include "app/players/game-session/game_session.h"
+#include "app/players/player.h"
+#include "model/game.h"
 
 namespace infrastructure {
 
@@ -17,7 +17,6 @@ class MemoryMappedPlayer : public app::IPlayer {
   }
 
   app::AddAttemptResult AddAttempt(game::WordCheckout attempt) override;
-  //  void ChangeSecretWord(std::string_view new_secret_word) noexcept override;
 
   // Getters
   int GetAttemptsAmount() const noexcept override;

@@ -2,9 +2,8 @@
 
 #include <string>
 
-#include "app/Players/players.h"
-#include "app/Scenarios/CheckWord/word_checker.h"
-#include "domain/game.h"
+#include "app/players/players.h"
+#include "model/game.h"
 
 namespace app {
 

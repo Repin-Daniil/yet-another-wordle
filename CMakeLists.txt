@@ -20,10 +20,10 @@ userver_setup_environment()
 # Common sources
 add_library(${PROJECT_NAME}_objs
         src/constants_storage.h
-        src/domain/game.h
-        src/domain/game.cpp
+        src/model/game.h
+        src/model/game.cpp
 
-        src/domain/dictionary.h
+        src/model/dictionary.h
         src/infrastructure/dictionary/in-memory/naive_dictionary.h
         src/infrastructure/dictionary/in-memory/naive_dictionary.cpp
         src/infrastructure/dictionary/dictionary_component.h
@@ -31,14 +31,14 @@ add_library(${PROJECT_NAME}_objs
 
         src/app/application.h
         src/app/application.cpp
-        src/app/Scenarios/scenarios.h
-        src/app/Scenarios/CheckWord/word_checker.h
-        src/app/Scenarios/CheckWord/word_checker.cpp
-        src/app/Scenarios/StartGame/game_starter.h
-        src/app/Scenarios/StartGame/game_starter.cpp
+        src/app/use-cases/scenarios.h
+        src/app/use-cases/check-word/word_checker.h
+        src/app/use-cases/check-word/word_checker.cpp
+        src/app/use-cases/start-game/game_starter.h
+        src/app/use-cases/start-game/game_starter.cpp
 
-        src/app/Players/player.h
-        src/app/Players/players.h
+        src/app/players/player.h
+        src/app/players/players.h
         src/infrastructure/players/players_component.h
         src/infrastructure/players/players_component.cpp
         src/infrastructure/players/in-memory/memory_mapped_player.h
@@ -46,11 +46,11 @@ add_library(${PROJECT_NAME}_objs
         src/infrastructure/players/in-memory/memory_mapped_players.h
         src/infrastructure/players/in-memory/memory_mapped_players.cpp
 
-        src/handlers/StartGame/start_game_handler.hpp
-        src/handlers/StartGame/start_game_handler.cpp
-        src/handlers/CheckWord/check_handler.hpp
-        src/handlers/CheckWord/check_handler.cpp
-        src/app/Sessions/game_session.cpp src/app/Sessions/game_session.h)
+        src/handlers/auth/start_game_handler.hpp
+        src/handlers/auth/start_game_handler.cpp
+        src/handlers/api/check_handler.hpp
+        src/handlers/api/check_handler.cpp
+        src/app/players/game-session/game_session.cpp src/app/players/game-session/game_session.h)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 

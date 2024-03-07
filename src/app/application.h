@@ -15,8 +15,8 @@
 #include "userver/utils/assert.hpp"
 #include <userver/formats/serialize/common_containers.hpp>
 
-#include "app/Scenarios/scenarios.h"
-#include "domain/game.h"
+#include "app/use-cases/scenarios.h"
+#include "model/game.h"
 #include "infrastructure/dictionary/dictionary_component.h"
 #include "infrastructure/players/players_component.h"
 

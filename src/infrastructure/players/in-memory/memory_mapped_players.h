@@ -12,9 +12,9 @@
 
 #include <userver/rcu/rcu_map.hpp>
 
-#include "app/Players/player.h"
-#include "app/Players/players.h"
-#include "app/Sessions/game_session.h"
+#include "app/players/game-session/game_session.h"
+#include "app/players/player.h"
+#include "app/players/players.h"
 #include "infrastructure/players/in-memory/memory_mapped_player.h"
 
 namespace infrastructure {

@@ -4,7 +4,7 @@
 #include <random>
 #include <utility>
 
-#include "domain/dictionary.h"
+#include "model/dictionary.h"
 
 namespace infrastructure {
 

@@ -10,7 +10,7 @@
 #include "userver/testsuite/testsuite_support.hpp"
 #include "userver/utils/daemon_run.hpp"
 
-#include "domain/game.h"
+#include "model/dictionary.h"
 #include "infrastructure/dictionary/in-memory/naive_dictionary.h"
 
 namespace infrastructure {

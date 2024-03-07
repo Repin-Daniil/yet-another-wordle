@@ -4,7 +4,7 @@
 #include <string>
 #include <string_view>
 
-#include "domain/game.h"
+#include "model/game.h"
 
 namespace app {
 
@@ -18,7 +18,6 @@ struct AddAttemptResult {
 class IPlayer {
  public:
     virtual AddAttemptResult AddAttempt(game::WordCheckout attempt) = 0;
-//    virtual void ChangeSecretWord(std::string_view new_secret_word) noexcept = 0;
 
     virtual int GetAttemptsAmount() const noexcept = 0;
     virtual int GetRemainingAttemptsAmount() const noexcept = 0;
