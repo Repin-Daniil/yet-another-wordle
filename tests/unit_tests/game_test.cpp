@@ -1,6 +1,6 @@
 #include <userver/utest/utest.hpp>
 
-#include "domain/game.h"
+#include "model/game.h"
 #include "infrastructure/dictionary/in-memory/naive_dictionary.h"
 
 namespace {

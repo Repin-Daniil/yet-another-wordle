@@ -67,11 +67,12 @@ components_manager:
 
     players:
       load-enabled: true
-      in-memory-storage: true
+      in-memory-storage: $in-memory-storage
 
     dictionary:
       load-enabled: true
       path-to-words: $path-to-words
+      fs-task-processor: fs-task-processor
 
     postgres-db-1:
       dbconnection: $dbconnection

@@ -4,15 +4,19 @@
 #include <string>
 #include <unordered_set>
 #include <utility>
+#include <sstream>
 
 #include "userver/clients/dns/component.hpp"
 #include "userver/clients/http/component.hpp"
+#include <userver/components/component_config.hpp>
+#include <userver/components/component_context.hpp>
 #include "userver/components/minimal_server_component_list.hpp"
 #include "userver/server/handlers/ping.hpp"
 #include "userver/server/handlers/tests_control.hpp"
 #include "userver/testsuite/testsuite_support.hpp"
 #include <userver/yaml_config/merge_schemas.hpp>
 #include "userver/utils/daemon_run.hpp"
+#include "userver/fs/read.hpp"
 
 #include "model/dictionary.h"
 #include "constants_storage.h"

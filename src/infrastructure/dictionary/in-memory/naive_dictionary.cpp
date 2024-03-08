@@ -11,7 +11,7 @@ std::string_view NaiveDictionary::GetRandomWord() {
 }
 
 bool NaiveDictionary::IsWordExist(std::string_view word) {
-  return words_.contains(word);
+  return words_.contains(word.data());
 }
 
 }  // namespace infrastructure
