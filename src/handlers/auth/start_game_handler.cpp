@@ -1,5 +1,17 @@
 #include "start_game_handler.hpp"
 
+namespace {
+
+using namespace userver;
+
+void CheckArgument(const std::string& arg, const std::string& arg_name) {
+  if (arg.empty()) {
+    throw std::invalid_argument("No '" + arg_name + "' argument!");
+  }
+}
+
+}  // namespace
+
 namespace handlers {
 
 GameStarterHandler::GameStarterHandler(const components::ComponentConfig& config,
@@ -9,7 +21,15 @@ GameStarterHandler::GameStarterHandler(const components::ComponentConfig& config
 
 std::string GameStarterHandler::HandleRequestThrow(const userver::server::http::HttpRequest& request,
                                                    userver::server::request::RequestContext&) const {
-  auto token = app_.StartGame();
+  const std::string& name = request.GetArg("name");
+
+  try {
+    CheckArgument(name, "name");
+  } catch (const std::invalid_argument& e) {
+    throw server::handlers::ClientError(server::handlers::ExternalBody{e.what()});
+  }
+
+  auto token = app_.StartGame(name);
 
   return token;
 }

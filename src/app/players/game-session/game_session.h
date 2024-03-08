@@ -26,8 +26,8 @@ class WordsArchive {
 
 class GameSession {
  public:
-  GameSession(game::Game& game, const Token& token)
-      : game_(game), current_secret_word_(game_.GetRandomWord()), player_token_(token) {
+  explicit GameSession(game::Game& game)  // TODO добавить id
+      : game_(game), current_secret_word_(game_.GetRandomWord()) {
   }
 
   void NextSecretWord(bool is_guessed, int attempts_amount);
@@ -35,9 +35,9 @@ class GameSession {
   std::vector<Word> GetSecretWordsHistory() const noexcept;
 
  private:
+  uint64_t id_;  // TODO У сессии есть id, у player не должно быть: он только для авторизации
   game::Game& game_;
   std::string_view current_secret_word_;
-  Token player_token_;
   WordsArchive archive_;
 };
 

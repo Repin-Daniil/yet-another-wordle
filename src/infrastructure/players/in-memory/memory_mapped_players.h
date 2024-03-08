@@ -38,7 +38,7 @@ struct TokenGenerator {
 
 class MemoryMappedPlayers : public app::IPlayers {
  public:
-  std::shared_ptr<app::IPlayer> AddPlayer(game::Game &game) override;
+  std::shared_ptr<app::IPlayer> AddPlayer(const std::string& name, game::Game &game) override;
   std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) override;
 
  private:

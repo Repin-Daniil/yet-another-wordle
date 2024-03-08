@@ -30,7 +30,7 @@ class Application : public userver::components::LoggableComponentBase {
               const userver::components::ComponentContext& context);
   ~Application() = default;
 
-  Token StartGame();
+  Token StartGame(const std::string &name);
   CheckWordResult CheckWord(const Token &token, std::string_view word);
 
   IPlayers& GetPlayers();

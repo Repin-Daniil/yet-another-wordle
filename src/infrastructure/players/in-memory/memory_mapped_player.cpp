@@ -6,6 +6,10 @@ std::string MemoryMappedPlayer::GetToken() const noexcept {
   return token_;
 }
 
+std::string MemoryMappedPlayer::GetName() const noexcept {
+  return name_;
+}
+
 std::string_view MemoryMappedPlayer::GetSecretWord() const noexcept {
   return session_.GetSecretWord();
 }

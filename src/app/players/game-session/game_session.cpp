@@ -34,4 +34,5 @@ bool WordsArchive::IsContainWord(std::string_view word) const noexcept {
 std::vector<Word> WordsArchive::GetWords() const noexcept {
   return words_;
 }
+
 }  // namespace app
