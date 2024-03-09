@@ -12,6 +12,7 @@
 
 #include <userver/rcu/rcu_map.hpp>
 #include "userver/storages/postgres/cluster.hpp"
+#include "userver/storages/postgres/cluster.hpp"
 
 #include "app/players/game-session/game_session.h"
 #include "app/players/player.h"

@@ -1,7 +1,5 @@
 #include "game_session.h"
 
-
-
 namespace app {
 
 void GameSession::NextSecretWord(bool is_guessed, int attempts_amount) {
@@ -22,6 +20,9 @@ std::string_view GameSession::GetSecretWord() const noexcept {
 
 std::vector<Word> GameSession::GetSecretWordsHistory() const noexcept {
   return archive_.GetWords();
+}
+int GameSession::GetId() const noexcept {
+  return id_;
 }
 
 void WordsArchive::AddWord(Word word) {

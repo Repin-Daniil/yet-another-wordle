@@ -16,10 +16,12 @@ CREATE TABLE IF NOT EXISTS wordle_schema.words
         CONSTRAINT word_num_positive CHECK (words.word_num >= 0),
     word     char(5)
         CONSTRAINT word_len_5 NOT NULL,
+        is_guessed boolean NOT NULL,
+        attempts_amount int CONSTRAINT attempts_amount_positive CHECK (attempts_amount >= 0) DEFAULT (0),
     PRIMARY KEY (id, word_num),
     FOREIGN KEY (id) REFERENCES wordle_schema.sessions (id)
 );
--- Добавить is_guessed, attempts amount
+
 CREATE TABLE IF NOT EXISTS wordle_schema.players
 (
     id         SERIAL PRIMARY KEY,
@@ -29,5 +31,5 @@ CREATE TABLE IF NOT EXISTS wordle_schema.players
         CONSTRAINT token_len_32 UNIQUE NOT NULL,
     score      integer CHECK (score >= 0) DEFAULT (0),
     reg_time   timestamp                  DEFAULT (now()),
-    session_id SERIAL REFERENCES wordle_schema.sessions (id)
+    session_id integer REFERENCES wordle_schema.sessions (id)
 );

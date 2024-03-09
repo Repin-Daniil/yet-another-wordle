@@ -25,6 +25,8 @@ class IPlayer {
     virtual std::string_view GetSecretWord() const noexcept = 0;
     virtual std::string GetToken() const noexcept = 0;
     virtual std::string GetName() const noexcept = 0;
+    virtual int GetId() const noexcept = 0;
+    virtual int GetSessionId() const noexcept = 0;
 
     virtual ~IPlayer() = default;
 };

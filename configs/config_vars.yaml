@@ -6,7 +6,7 @@ is-testing: false
 
 server-port: 8080
 
-path-to-words: "res/rus_words.txt"
+path-to-words: "res/eng_words.txt"
 in-memory-storage: true
 
 dbconnection: ''

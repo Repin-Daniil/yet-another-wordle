@@ -8,8 +8,9 @@
 #include "app/players/player.h"
 
 namespace {
-const userver::storages::postgres::Query kInsertGameSession{"INSERT INTO wordle_schema.sessions (words_amount) VALUES($1)",
-                                                       userver::storages::postgres::Query::Name{"insert_game_session"}};
+const userver::storages::postgres::Query kInsertGameSession{
+    "INSERT INTO wordle_schema.sessions (words_amount) VALUES($1) RETURNING id",
+    userver::storages::postgres::Query::Name{"insert_game_session"}};
 }
 
 namespace app {
@@ -35,15 +36,19 @@ class GameSession {
  public:
   GameSession(game::Game& game, userver::storages::postgres::ClusterPtr& pg_cluster)
       : game_(game), pg_cluster_(pg_cluster), current_secret_word_(game_.GetRandomWord()) {
-    auto result_insert = pg_cluster_->Execute(userver::storages::postgres::ClusterHostType::kMaster, kInsertGameSession, 0);
+    auto result_insert =
+        pg_cluster_->Execute(userver::storages::postgres::ClusterHostType::kMaster, kInsertGameSession, 0);
+
+    id_ = result_insert.AsSingleRow<int>();
   }
 
   void NextSecretWord(bool is_guessed, int attempts_amount);
   std::string_view GetSecretWord() const noexcept;
   std::vector<Word> GetSecretWordsHistory() const noexcept;
+  int GetId() const noexcept;
 
  private:
-  uint64_t id_;
+  int id_;
   game::Game& game_;
   userver::storages::postgres::ClusterPtr& pg_cluster_;
   std::string_view current_secret_word_;

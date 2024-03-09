@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -12,8 +13,8 @@ namespace infrastructure {
 
 class MemoryMappedPlayer : public app::IPlayer {
  public:
-  MemoryMappedPlayer(std::string name, app::Token token, app::GameSession session)
-      : name_(std::move(name)), token_(std::move(token)), session_(std::move(session)) {
+  MemoryMappedPlayer(int id, std::string name, app::Token token, app::GameSession session)
+      : id_(id), name_(std::move(name)), token_(std::move(token)), session_(std::move(session)) {
   }
 
   app::AddAttemptResult AddAttempt(game::WordCheckout attempt) override;
@@ -25,11 +26,14 @@ class MemoryMappedPlayer : public app::IPlayer {
   std::string_view GetSecretWord() const noexcept override;
   std::string GetToken() const noexcept override;
   std::string GetName() const noexcept override;
+  int GetId() const noexcept override;
+  int GetSessionId() const noexcept override;
 
  private:
   void ResetAttempts();
 
  private:
+  int id_;
   std::string name_;
   app::Token token_;
   app::GameSession session_;

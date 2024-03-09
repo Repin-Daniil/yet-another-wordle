@@ -48,4 +48,12 @@ int MemoryMappedPlayer::GetRemainingAttemptsAmount() const noexcept {
   return constants::GameSettings::kMaxAttemptsAmount - GetAttemptsAmount();
 }
 
+int MemoryMappedPlayer::GetId() const noexcept {
+  return id_;
+}
+
+int MemoryMappedPlayer::GetSessionId() const noexcept {
+  return session_.GetId();
+}
+
 }  // namespace infrastructure

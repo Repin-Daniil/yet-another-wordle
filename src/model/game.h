@@ -5,8 +5,6 @@
 #include <string>
 #include <unordered_map>
 #include <utility>
-#include <codecvt>
-#include <locale>
 
 #include "constants_storage.h"
 #include "dictionary.h"
@@ -24,7 +22,7 @@ using constants::GameSettings;
 struct WordCheckout {
   WordStatus status;
   std::array<LetterStatus, GameSettings::kWordLength> letters;
-  std::u32string word;
+  std::string_view word;
 };
 
 
