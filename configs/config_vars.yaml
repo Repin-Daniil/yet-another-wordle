@@ -6,7 +6,7 @@ is-testing: false
 
 server-port: 8080
 
-path-to-words: "res/WORDS.txt"
+path-to-words: "res/rus_words.txt"
 in-memory-storage: true
 
 dbconnection: 'postgresql://postgres:Mys3Cr3t@62.84.114.238:30432/wordle_db'
