@@ -1,5 +1,7 @@
 #include "game_session.h"
 
+
+
 namespace app {
 
 void GameSession::NextSecretWord(bool is_guessed, int attempts_amount) {

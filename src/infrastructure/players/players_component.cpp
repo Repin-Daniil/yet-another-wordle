@@ -11,11 +11,12 @@ namespace infrastructure {
 
 PlayersComponent::PlayersComponent(const components::ComponentConfig& config,
                                    const components::ComponentContext& context)
-    : LoggableComponentBase(config, context) {
+    : LoggableComponentBase(config, context),
+      pg_cluster_(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()) {
   bool store_in_memory = config[constants::ConfigArgs::store_in_memory].As<bool>();
 
   if (store_in_memory) {
-    players_ = std::make_unique<MemoryMappedPlayers>();
+    players_ = std::make_unique<MemoryMappedPlayers>(pg_cluster_);
   }
 }
 

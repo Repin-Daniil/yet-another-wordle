@@ -64,7 +64,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 # Unit Tests
 add_executable(${PROJECT_NAME}_unittest
-        tests/unit_tests/game_test.cpp
+        "tests/unit_tests/eng_game_test.cpp"
         )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
 add_google_tests(${PROJECT_NAME}_unittest)

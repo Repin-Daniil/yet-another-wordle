@@ -16,12 +16,15 @@ std::string TokenGenerator::GenerateNewToken() {
 
 std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(const std::string& name, game::Game& game) {
   auto token = token_generator_.GenerateNewToken();
-  auto player_ptr = players_.Emplace(token, name, token, app::GameSession(game));
+  auto player_ptr = players_.Emplace(token, name, token, app::GameSession(game, pg_cluster_));
+
 
   while (!player_ptr.inserted) {
     token = token_generator_.GenerateNewToken();
-    player_ptr = players_.Emplace(token, name, token, app::GameSession(game));
+    player_ptr = players_.Emplace(token, name, token, app::GameSession(game, pg_cluster_));
   }
+
+  // TODO добавить в Базу
 
   return player_ptr.value;
 }
