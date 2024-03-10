@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <userver/rcu/rcu_map.hpp>
+#include "userver/storages/postgres/cluster.hpp"
 
 #include "app/players/game-session/game_session.h"
 #include "app/players/player.h"
@@ -38,10 +39,14 @@ struct TokenGenerator {
 
 class MemoryMappedPlayers : public app::IPlayers {
  public:
-  std::shared_ptr<app::IPlayer> AddPlayer(game::Game &game) override;
+  explicit MemoryMappedPlayers(userver::storages::postgres::ClusterPtr& pg_cluster) : pg_cluster_(pg_cluster) {
+  }
+
+  std::shared_ptr<app::IPlayer> AddPlayer(std::string_view name, game::Game &game) override;
   std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) override;
 
  private:
+  userver::storages::postgres::ClusterPtr& pg_cluster_;
   userver::rcu::RcuMap<std::string, MemoryMappedPlayer> players_;
   TokenGenerator token_generator_;
 };

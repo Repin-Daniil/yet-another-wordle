@@ -55,6 +55,7 @@ components_manager:
       path: /v1/start
       method: POST
       task_processor: main-task-processor
+      parse_args_from_body: true
 
     handler-check:
       path: /v1/check
