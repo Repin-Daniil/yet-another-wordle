@@ -10,7 +10,6 @@
 #include <userver/yaml_config/merge_schemas.hpp>
 #include <userver/components/component_config.hpp>
 #include <userver/components/component_context.hpp>
-#include "userver/components/component_list.hpp"
 
 #include "infrastructure/players/in-memory/memory_mapped_players.h"
 

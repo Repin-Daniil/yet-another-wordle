@@ -4,8 +4,8 @@ logger-level: debug
 
 is-testing: true
 
-path-to-words: "../res/WORDS.txt"
+path-to-words: "../res/eng_words.txt"
 in-memory-storage: true
 
-# wordle_db is the service name + _ + filename of the db.sql
-dbconnection: 'postgresql://testsuite@localhost:15433/wordle_db'
+# wordle_db is the service name + _ + filename of the db_1.sql
+dbconnection: 'postgresql://testsuite@localhost:15433/wordle_db-1'
