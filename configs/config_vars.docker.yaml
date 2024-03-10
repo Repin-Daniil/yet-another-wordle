@@ -9,4 +9,4 @@ server-port: 8080
 path-to-words: "../res/eng_words.txt"
 in-memory-storage: true
 
-dbconnection: 'postgresql://user:password@service-postgres:5432/wordle_db-1'
+dbconnection: 'postgresql://wordle_user:password@service-postgres:5432/wordle_db-1'

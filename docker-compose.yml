@@ -6,7 +6,7 @@ services:
     image: postgres:12
     environment:
       - POSTGRES_DB=wordle_db-1
-      - POSTGRES_USER=user
+      - POSTGRES_USER=wordle_user
       - POSTGRES_PASSWORD=password
     ports:
       - 5432
@@ -21,7 +21,7 @@ services:
     privileged: true
     environment:
       - POSTGRES_DB=wordle_db-1
-      - POSTGRES_USER=user
+      - POSTGRES_USER=wordle_user
       - POSTGRES_PASSWORD=password
       - PREFIX=${PREFIX:-~/.local}
       - CC
@@ -35,6 +35,7 @@ services:
       - CXX
       - MAKE_OPTS
       - CMAKE_COMMON_FLAGS
+      - TZ=Asia/Yekaterinburg
     volumes:
       - .:/wordle:rw
       - ./third_party/userver/tools/docker:/tools:ro
