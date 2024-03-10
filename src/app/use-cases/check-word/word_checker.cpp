@@ -17,7 +17,8 @@ CheckWordResult WordChecker::Check(const Token& token, std::string_view word) {
 
   auto result = player->AddAttempt(attempt);
 
-  return {result.attempts, result.is_new_word_set};
+
+  return {result.attempts, result.remaining_attempts, result.is_new_word_set};
 }
 
 }  // namespace app

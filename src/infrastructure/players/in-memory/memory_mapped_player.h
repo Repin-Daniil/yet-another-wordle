@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <unordered_set>
 
 #include "app/players/game-session/game_session.h"
 #include "app/players/player.h"
@@ -22,12 +23,13 @@ class MemoryMappedPlayer : public app::IPlayer {
   // Getters
   int GetAttemptsAmount() const noexcept override;
   int GetRemainingAttemptsAmount() const noexcept override;
+  app::Token GetToken() const noexcept override;
   std::vector<game::WordCheckout> GetAttempts() const noexcept override;
   std::string_view GetSecretWord() const noexcept override;
-  std::string GetToken() const noexcept override;
-  std::string GetName() const noexcept override;
+  std::string_view GetName() const noexcept override;
   int GetId() const noexcept override;
   int GetSessionId() const noexcept override;
+
 
  private:
   void ResetAttempts();
@@ -38,6 +40,7 @@ class MemoryMappedPlayer : public app::IPlayer {
   app::Token token_;
   app::GameSession session_;
   std::vector<game::WordCheckout> attempts_;
+  std::unordered_set<std::string> words_set_;
 };
 
 }  // namespace infrastructure

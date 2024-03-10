@@ -22,7 +22,7 @@ using constants::GameSettings;
 struct WordCheckout {
   WordStatus status;
   std::array<LetterStatus, GameSettings::kWordLength> letters;
-  std::string_view word;
+  std::string word;
 };
 
 

@@ -23,7 +23,7 @@ std::string TokenGenerator::GenerateNewToken() {
   return ss.str();
 }
 
-std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(const std::string& name, game::Game& game) {
+std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(std::string_view name, game::Game& game) {
   auto session = app::GameSession(game, pg_cluster_);
 
   auto token = token_generator_.GenerateNewToken();
@@ -39,7 +39,7 @@ std::shared_ptr<app::IPlayer> MemoryMappedPlayers::AddPlayer(const std::string& 
   auto result_insert = pg_cluster_->Execute(userver::storages::postgres::ClusterHostType::kMaster, kInsertPlayer, name,
                                             token, session.GetId());
 
-  auto player_ptr = players_.Emplace(token, result_insert.AsSingleRow<int>(), name, token, session);
+  auto player_ptr = players_.Emplace(token, result_insert.AsSingleRow<int>(), name.data(), token, session);
 
   return player_ptr.value;
 }

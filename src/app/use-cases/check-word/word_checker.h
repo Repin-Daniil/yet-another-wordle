@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <optional>
 
 #include "app/players/players.h"
 #include "model/game.h"
 
 namespace app {
 
-enum class CheckWordErrorReason { UNREAL_TOKEN, UNREAL_WORD };
+enum class CheckWordErrorReason { UNREAL_TOKEN, UNREAL_WORD, REPEATED_WORD };
 
 struct CheckWordError {
   CheckWordErrorReason reason;
@@ -15,8 +16,8 @@ struct CheckWordError {
 
 struct CheckWordResult {
   std::vector<game::WordCheckout> attempts;
+  int remaining_attempts;
   bool is_new_word = false;
-  int max_attempts_amount = constants::GameSettings::kMaxAttemptsAmount;
 };
 
 class WordChecker {

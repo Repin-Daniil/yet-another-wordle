@@ -12,7 +12,6 @@
 
 #include <userver/rcu/rcu_map.hpp>
 #include "userver/storages/postgres/cluster.hpp"
-#include "userver/storages/postgres/cluster.hpp"
 
 #include "app/players/game-session/game_session.h"
 #include "app/players/player.h"
@@ -43,7 +42,7 @@ class MemoryMappedPlayers : public app::IPlayers {
   explicit MemoryMappedPlayers(userver::storages::postgres::ClusterPtr& pg_cluster) : pg_cluster_(pg_cluster) {
   }
 
-  std::shared_ptr<app::IPlayer> AddPlayer(const std::string& name, game::Game &game) override;
+  std::shared_ptr<app::IPlayer> AddPlayer(std::string_view name, game::Game &game) override;
   std::shared_ptr<app::IPlayer> GetPlayerByToken(const app::Token& token) override;
 
  private:

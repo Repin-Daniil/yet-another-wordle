@@ -43,8 +43,8 @@ userver::formats::json::Value Serialize(const app::CheckWordResult& result,
   userver::formats::json::ValueBuilder builder;
 
   builder["attempts"] = userver::formats::json::ValueBuilder(result.attempts).ExtractValue();
+  builder["remaining_attempts"] = result.remaining_attempts;
   builder["is_new_word_set"] = result.is_new_word;
-  builder["max_attempts_amount"] = result.max_attempts_amount;
 
   return builder.ExtractValue();
 }

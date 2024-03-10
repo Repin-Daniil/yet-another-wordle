@@ -14,7 +14,7 @@ class GameStarter {
   GameStarter(game::Game& game, IPlayers& players) : game_(game), players_(players) {
   }
 
-  Token Start(const std::string& name);
+  Token Start(std::string_view name);
 
  private:
   game::Game game_;

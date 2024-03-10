@@ -8,7 +8,8 @@ const userver::storages::postgres::Query kUpdateGameSession{
     "UPDATE wordle_schema.sessions SET words_amount = words_amount + 1 WHERE id = $1",
     userver::storages::postgres::Query::Name{"update_game_session"}};
 const userver::storages::postgres::Query kInsertWord{
-    "INSERT INTO wordle_schema.words (session_id, word_num, word, is_guessed, attempts_amount) VALUES($1, $2, $3, $4, $5)",
+    "INSERT INTO wordle_schema.words (session_id, word_num, word, is_guessed, attempts_amount) VALUES($1, $2, $3, $4, "
+    "$5)",
     userver::storages::postgres::Query::Name{"insert_game_session"}};
 }  // namespace
 
@@ -44,17 +45,18 @@ std::string_view GameSession::GetSecretWord() const noexcept {
 std::vector<Word> GameSession::GetSecretWordsHistory() const noexcept {
   return archive_.GetWords();
 }
+
 int GameSession::GetId() const noexcept {
   return id_;
 }
 
-void WordsArchive::AddWord(Word word) {
+void WordsArchive::AddWord(const Word& word) {
   words_set_.insert(word.value);
   words_.push_back(word);
 }
 
 bool WordsArchive::IsContainWord(std::string_view word) const noexcept {
-  return words_set_.contains(word);
+  return words_set_.contains(word.data());
 }
 
 std::vector<Word> WordsArchive::GetWords() const noexcept {

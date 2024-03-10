@@ -27,10 +27,12 @@ game::Game& Application::GetGame() {
 }
 
 Token Application::StartGame(const std::string &name) {
+  LOG_INFO() << "Start Game for player with name " << name;
   return game_starter_.Start(name);
 }
 
 CheckWordResult Application::CheckWord(const Token& token, std::string_view word) {
+  LOG_INFO() << "Check Word " << word << " for player with token " << token;
   return word_checker_.Check(token, word);
 }
 
